@@ -1,0 +1,114 @@
+space: {{ isc_IsaSchemaSpace }}
+externalId: Equipment
+name: Equipment
+description: Physical equipment used in manufacturing processes, ISA-88 Equipment Model.
+usedFor: node
+constraints:
+  requiresCogniteEquipment:
+    constraintType: requires
+    require:
+      space: cdf_cdm
+      externalId: CogniteEquipment
+      type: container
+properties:
+  equipmentId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Equipment ID
+  equipmentName:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Equipment Name
+  equipmentClass:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Equipment Class
+  equipmentType:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Equipment Type
+  unit:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: unit
+  manufacturer:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: manufacturer
+  model:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: model
+  serialNumber:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Serial Number
+  timeSeries:
+    type:
+      list: true
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: timeSeries
+  files:
+    type:
+      list: true
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: files
+  workOrders:
+    type:
+      list: true
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: workOrders
+indexes:
+  equipmentId_idx:
+    properties:
+    - equipmentId
+    cursorable: true
+    indexType: btree

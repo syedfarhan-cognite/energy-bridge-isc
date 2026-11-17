@@ -1,0 +1,170 @@
+space: {{ isc_IsaSchemaSpace }}
+externalId: ProductDefinition
+name: ProductDefinition
+description: Definition of the product process and resources ISA-95 Level 3.
+usedFor: node
+properties:
+  sourceUpdatedUser:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceUpdatedUser
+    description: User that last updated this node in the source system.
+  sourceCreatedUser:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceCreatedUser
+    description: User that created this node in the source system.
+  sourceUpdatedTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceUpdatedTime
+    description: Timestamp when the node was last updated in the source system.
+  sourceCreatedTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceCreatedTime
+    description: Timestamp when the node was created in the source system.
+  sourceContext:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceContext
+    description: Source system or context for this node.
+  sourceId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceId
+    description: Identifier from the upstream source system.
+  description:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: description
+    description: Human-readable description for this node.
+  name:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: name
+    description: Human-readable name for this node.
+  productDefinitionId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: false
+    autoIncrement: false
+    name: Product Definition ID
+  version:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: version
+  status:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: status
+  validFrom:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Valid From
+  validTo:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Valid To
+  unit:
+    type:
+      list: true
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: unit
+  productSegment:
+    type:
+      list: true
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Product Segment
+  hasBom:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: hasBom
+  files:
+    type:
+      list: true
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: files
+indexes:
+  hasBom:
+    properties:
+    - hasBom
+    cursorable: false
+    indexType: btree
+  productDefinitionId_idx:
+    properties:
+    - productDefinitionId
+    cursorable: true
+    indexType: btree

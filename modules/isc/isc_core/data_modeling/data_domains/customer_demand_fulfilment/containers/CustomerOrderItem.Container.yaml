@@ -1,0 +1,256 @@
+space: {{ isc_CustomerDemandFulfilmentSchemaSpace }}
+externalId: CustomerOrderItem
+name: CustomerOrderItem
+description: Line-level definition of what was ordered - product, requested and confirmed quantities, fulfillment location, commercial values, and item-level execution status. One node per customer order line item.
+constraints:
+  customerOrderPresent:
+    constraintType: requires
+    require:
+      space: {{ isc_CustomerDemandFulfilmentSchemaSpace }}
+      externalId: CustomerOrder
+      type: container
+properties:
+  customerOrderId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Customer Order ID
+    description: customer order number. Foreign key linking this item to its CustomerOrder header. Part of the composite primary key.
+  customerOrderItemId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: false
+    autoIncrement: false
+    name: Customer Order Item ID
+    description: Line identifier within the customer order, e.g. 000010, 000020. Composite primary key with customerOrderId.
+  itemCategory:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Item Category
+    description: Line classification driving fulfilment behaviour and pricing for example TAN for Standard item, TANN for Free-of-charge, TATX for Text item.
+  material:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Material
+    description: Direct relation to the MaterialMaster node representing the product ordered on this line.
+  itemDescription:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Item Description
+    description: Human-readable description of the ordered line as seen by customer-facing and service teams.
+  plant:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Plant
+    description: Direct relation to the FunctionalAsset node for the fulfilling site or plant from which the product is sourced or produced.
+  storageLocation:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Storage Location
+    description: Direct relation to the FunctionalAsset node for the specific warehouse or storage location used for fulfilment, if applicable.
+  allocationRef:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Allocation Reference
+    description: Direct relation to the ProductAllocation bucket this order line consumes for allocation traceability and headroom auditability.
+  promiseBasis:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Promise Basis
+    description: Method used for confirming this line item, for example ATP-Stock, ATP-Production, ATP-Inbound, AllocationCapped, or Manual.
+  orderedQuantity:
+    type:
+      list: false
+      type: float64
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Ordered Quantity
+    description: Quantity requested on this order line in the order unit of measure.
+  orderQuantityUnit:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Order Quantity Unit
+    description: Unit of measure for the orderedQuantity and confirmedQuantity fields for example EA, KG, M.
+  netValue:
+    type:
+      list: false
+      type: float64
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Net Value
+    description: Commercial net value for this order line excluding taxes and freight unless included by policy. Drives line-level revenue tracking.
+  currency:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Currency
+    description: Currency code for all commercial values on this line, e.g. NOK, USD, EUR.
+  requestedDeliveryDate:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Requested Delivery Date
+    description: Delivery date requested by the customer for this specific line. May differ from the header requestedDeliveryDate when lines have individual delivery requirements.
+  confirmedDeliveryDate:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Confirmed Delivery Date
+    description: Delivery date committed to the customer based on availability check and ATP confirmation. Core field for OTIF measurement and lateness alerting, EDATU - schedule line.
+  confirmedQuantity:
+    type:
+      list: false
+      type: float64
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Confirmed Quantity
+    description: Quantity the organisation has committed to deliver based on availability confirmation. May be less than orderedQuantity when stock or capacity is constrained.
+  rejectionReason:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Rejection Reason
+    description: Reason code when this line is rejected or cancelled. Used for lost order analysis and service level reporting.
+  itemProcessingStatus:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Item Processing Status
+    description: Item-level lifecycle state for example open, confirmed, delivered, completed, blocked. Complements the header-level overallProcessingStatus with line-level granularity.
+  requiredProductGrade:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Required Product Grade
+    description: The minimum product grade contracted by the customer for this order line for example Grade 1. Used by the agent to assess whether a production run satisfies this order.
+  maxAcceptedProductGrade:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Max Accepted Product Grade
+    description: The highest, lowest quality, grade the customer will accept on this order line as per contract tolerance for example Grade 3 means grades 1-3 are all acceptable. Null or equal to requiredProductGrade means strictly no downgrade permitted. Enables the agent to differentiate satisfiable from unsatisfiable orders during an off-spec production event without parsing unstructured contract PDFs.
+indexes:
+  customerOrderItemId:
+    properties:
+    - customerOrderId
+    - customerOrderItemId
+    cursorable: true
+    indexType: btree
+  itemCategory:
+    properties:
+    - itemCategory
+    cursorable: true
+    indexType: btree
+  material:
+    properties:
+    - material
+    cursorable: false
+    indexType: btree
+  plant:
+    properties:
+    - plant
+    cursorable: false
+    indexType: btree
+  storageLocation:
+    properties:
+    - storageLocation
+    cursorable: false
+    indexType: btree
+  allocationRef:
+    properties:
+    - allocationRef
+    cursorable: false
+    indexType: btree
+  requestedDeliveryDate:
+    properties:
+    - requestedDeliveryDate
+    cursorable: true
+    indexType: btree
+  confirmedDeliveryDate:
+    properties:
+    - confirmedDeliveryDate
+    cursorable: true
+    indexType: btree
+  itemProcessingStatus:
+    properties:
+    - itemProcessingStatus
+    cursorable: true
+    indexType: btree
+  requiredProductGrade:
+    properties:
+    - requiredProductGrade
+    cursorable: true
+    indexType: btree
+usedFor: node

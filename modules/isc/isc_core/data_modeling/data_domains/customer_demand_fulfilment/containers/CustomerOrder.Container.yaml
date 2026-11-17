@@ -1,0 +1,324 @@
+space: {{ isc_CustomerDemandFulfilmentSchemaSpace }}
+externalId: CustomerOrder
+name: CustomerOrder
+description: Commercial demand document capturing a customers request for products and services, including ordering party, requested dates, and overall fulfillment and billing progress. One node per customer order.
+properties:
+  name:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Name
+    description: Human-readable name for this node.
+  description:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Description
+    description: Human-readable description for this node.
+  sourceId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source ID
+    description: Identifier from the upstream source system.
+  sourceContext:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Context
+    description: Source system or context for this node.
+  sourceCreatedTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Created Time
+    description: Timestamp when the node was created in the source system.
+  sourceUpdatedTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Updated Time
+    description: Timestamp when the node was last updated in the source system.
+  sourceCreatedUser:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Created User
+    description: User that created this node in the source system.
+  sourceUpdatedUser:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Updated User
+    description: User that last updated this node in the source system.
+  customerOrderId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Customer Order ID
+    description: Unique identifier for the customer order document. Primary key - not nullable.
+  customerOrderType:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Customer Order Type
+    description: Classification of the customer order driving process and pricing rules for example OR for Standard, RU for Rush Order, RE for Returns.
+  salesOrganization:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Sales Organization
+    description: Commercial organisation responsible for the order - governs pricing, reporting, and governance structure.
+  distributionChannel:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Distribution Channel
+    description: Channel through which the order is sold for example direct, distributor, e-commerce. Part of the sales area key alongside salesOrganization and division.
+  division:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Division
+    description: Product or business division for reporting and process segmentation.
+  companyCode:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Company Code
+    description: Company Code - legal entity responsible for this customer order for financial accounting and revenue recognition purposes.
+  soldToCustomerId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Sold-to Customer ID
+    description: Identifier of the customer commercially responsible for placing the order. Used for customer relationship management and credit checks.
+  soldToCustomer:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Sold-to Customer
+    description: Direct relation to the Customer master record for the commercially responsible party. Graph-traversable equivalent of soldToCustomerId.
+  shipToCustomerId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Ship-to Customer ID
+    description: Identifier of the receiving party or delivery location, may differ from sold-to. Determines delivery routing and address.
+  shipToLocation:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Ship-to Location
+    description: Direct relation to the CustomerLocation node for the default physical delivery destination on this order.
+  customerPurchaseOrderId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Customer Purchase Order ID
+    description: Customer-provided reference number for matching, dispute resolution, and billing reconciliation.
+  orderDate:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Order Date
+    description: Date the customer order is considered effective for commercial and planning timelines.
+  createdOn:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Created On
+    description: System creation timestamp for the order record in the source ERP system.
+  createdByUser:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Created By User
+    description: User identifier of the person who created the order in the source ERP system.
+  requestedDeliveryDate:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Requested Delivery Date
+    description: Customer requested delivery date at order header level. May be overridden at line or schedule line level.
+  paymentTerms:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Payment Terms
+    description: Payment terms agreed with this customer for this order, e.g. NET30. Drives accounts receivable cash flow planning and credit limit management.
+  totalNetValue:
+    type:
+      list: false
+      type: float64
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Total Net Value
+    description: Total net commercial value of all line items in this customer order in document currency. Used for revenue-at-risk calculations and order prioritisation in the Command Centre.
+  overallProcessingStatus:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Overall Processing Status
+    description: High-level lifecycle state of the order for example open, in process, completed, blocked. Drives order management dashboards.
+  overallDeliveryStatus:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Overall Delivery Status
+    description: High-level fulfilment state for example not delivered, partially delivered, fully delivered. Key KPI for OTIF measurement.
+  overallBillingStatus:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Overall Billing Status
+    description: High-level billing state for example not billed, partially billed, fully billed. Signals financial closure progress.
+indexes:
+  customerOrderId:
+    properties:
+    - customerOrderId
+    cursorable: true
+    indexType: btree
+  customerOrderType:
+    properties:
+    - customerOrderType
+    cursorable: true
+    indexType: btree
+  salesOrganization:
+    properties:
+    - salesOrganization
+    cursorable: true
+    indexType: btree
+  soldToCustomer:
+    properties:
+    - soldToCustomer
+    cursorable: false
+    indexType: btree
+  shipToLocation:
+    properties:
+    - shipToLocation
+    cursorable: false
+    indexType: btree
+  orderDate:
+    properties:
+    - orderDate
+    cursorable: true
+    indexType: btree
+  requestedDeliveryDate:
+    properties:
+    - requestedDeliveryDate
+    cursorable: true
+    indexType: btree
+  overallProcessingStatus:
+    properties:
+    - overallProcessingStatus
+    cursorable: true
+    indexType: btree
+  overallDeliveryStatus:
+    properties:
+    - overallDeliveryStatus
+    cursorable: true
+    indexType: btree
+usedFor: node

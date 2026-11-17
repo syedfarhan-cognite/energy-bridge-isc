@@ -1,0 +1,26 @@
+space: {{ isc_OrganizationalFoundationSchemaSpace }}
+externalId: OrganizationalFoundation
+name: OrganizationalFoundation
+description: Organizational foundation domain — hierarchies interfaces, products, notifications.
+version: '{{dmVersion}}'
+views:
+- space: {{ isc_OrganizationalFoundationSchemaSpace }}
+  externalId: DeclaredTypes
+  version: '{{dmVersion}}'
+  type: view
+- space: {{ isc_OrganizationalFoundationSchemaSpace }}
+  externalId: GeoLocations
+  version: '{{dmVersion}}'
+  type: view
+- space: {{ isc_OrganizationalFoundationSchemaSpace }}
+  externalId: BusinessUnits
+  version: '{{dmVersion}}'
+  type: view
+- space: {{ isc_OrganizationalFoundationSchemaSpace }}
+  externalId: MasterNotification
+  version: '{{dmVersion}}'
+  type: view
+- space: {{ isc_OrganizationalFoundationSchemaSpace }}
+  externalId: NotificationLinksEntity
+  version: '{{dmVersion}}'
+  type: view

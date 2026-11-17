@@ -1,0 +1,201 @@
+space: {{ isc_IsaSchemaSpace }}
+externalId: ProductionRequest
+name: ProductionRequest
+description: ERP-facing request to produce specific quantities of products, ISA-95 Level 3 and Level 4 interface.
+usedFor: node
+properties:
+  sourceUpdatedUser:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceUpdatedUser
+    description: User that last updated this node in the source system.
+  sourceCreatedUser:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceCreatedUser
+    description: User that created this node in the source system.
+  sourceUpdatedTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceUpdatedTime
+    description: Timestamp when the node was last updated in the source system.
+  sourceCreatedTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceCreatedTime
+    description: Timestamp when the node was created in the source system.
+  sourceContext:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceContext
+    description: Source system or context for this node.
+  sourceId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceId
+    description: Identifier from the upstream source system.
+  description:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: description
+    description: Human-readable description for this node.
+  name:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: name
+    description: Human-readable name for this node.
+  productRequestId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: false
+    autoIncrement: false
+    name: Product Request ID
+  requestNumber:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: false
+    autoIncrement: false
+    name: Request Number
+  priority:
+    type:
+      list: false
+      type: int32
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: priority
+  dueDate:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Due Date
+  quantityRequested:
+    type:
+      list: false
+      type: float64
+    immutable: false
+    nullable: false
+    autoIncrement: false
+    name: Quantity Requested
+  quantityUnit:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Quantity Unit
+  requestStatus:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Request Status
+  productDefinition:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Product Definition
+  unit:
+    type:
+      list: true
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: unit
+  files:
+    type:
+      list: true
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: files
+  productionSchedules:
+    type:
+      list: true
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Production Schedules
+  peggedFromForecast:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Pegged From Forecast
+    description: Direct relation to the Forecast that pegged this production request.
+indexes:
+  productRequestId_idx:
+    properties:
+    - productRequestId
+    cursorable: true
+    indexType: btree
+  requestNumber_idx:
+    properties:
+    - requestNumber
+    cursorable: true
+    indexType: btree
+  productDefinition_idx:
+    properties:
+    - productDefinition
+    cursorable: false
+    indexType: btree

@@ -1,0 +1,4 @@
+[module]
+title = "ISC Connect - Manufacturing"
+description = "Manufacturing domain extension: production schedule, product definition, and ISA asset wiring."
+tags = ["isc", "connect", "manufacturing"]

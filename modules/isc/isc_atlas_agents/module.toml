@@ -1,0 +1,4 @@
+[module]
+title = "ISC Atlas Agents"
+description = "Atlas/AI agents for the maintenance supply chain command centre: the maintenance planner orchestrator plus its data scout and operations watchtower specialists."
+tags = ["isc", "agents", "atlas"]

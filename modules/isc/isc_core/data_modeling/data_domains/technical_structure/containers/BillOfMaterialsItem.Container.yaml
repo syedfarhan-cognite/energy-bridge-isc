@@ -1,0 +1,301 @@
+space: {{ isc_TechnicalStructureSchemaSpace }}
+externalId: BillOfMaterialsItem
+name: BillOfMaterialsItem
+description: BOM item and component-level properties describing individual spare parts, quantities, and classifications within a Bill of Materials.
+properties:
+  name:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Name
+    description: Human-readable name for this node.
+  description:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Description
+    description: Human-readable description for this node.
+  sourceId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source ID
+    description: Identifier from the upstream source system.
+  sourceContext:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Context
+    description: Source system or context for this node.
+  sourceCreatedTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Created Time
+    description: Timestamp when the node was created in the source system.
+  sourceUpdatedTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Updated Time
+    description: Timestamp when the node was last updated in the source system.
+  sourceCreatedUser:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Created User
+    description: User that created this node in the source system.
+  sourceUpdatedUser:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Updated User
+    description: User that last updated this node in the source system.
+  billOfMaterialsHeader:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Bill of Materials Header
+    description: Direct relation to the parent BOM header that owns this component line.
+  bomItemNumber:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Item Number
+    description: The sequence number of the component within the BOM list for example 0010, 0020. Maps to SAP POSNR.
+  bomItemNodeNumber:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Item Node Number
+    description: BOM item node number. Internal identifier for a position within the bill of materials structure item in SAP.
+  bomComponentMaterialId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Component Material ID
+    description: The unique Material Master ID, IDNRK, for the spare part or sub-assembly used in this BOM.
+  bomComponentMaterial:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Component Material
+    description: Direct relation to the MaterialMaster node for the component material.
+  bomComponentQuantity:
+    type:
+      list: false
+      type: float64
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Component Quantity
+    description: The required amount of the component material for one unit of the parent resource.
+  bomUnitOfMeasure:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Unit of Measure
+    description: The standardized unit for the component quantity for example Each, Meters, KG.
+  bomItemCategory:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Item Category
+    description: "ISA-95 Resource Type: Distinguishes between Stock Items code L, Non-Stock Items code N, and Text and Instruction Items code T. Maps to SAP POSTP."
+  bomIsSparePart:
+    type:
+      list: false
+      type: boolean
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Is Spare Part
+    description: A boolean flag identifying if the component is officially classified as a spare part for maintenance purposes.
+  bomTechnicalText:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Technical Text
+    description: Specific maintenance instructions or technical notes related to this component within the assembly.
+  bomFixedQuantityFlag:
+    type:
+      list: false
+      type: boolean
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Fixed Quantity Flag
+    description: Indicates if the component quantity is fixed regardless of the parent assembly size.
+  baseUnitOfMeasure:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Base Unit of Measure
+    description: Base unit of measure from Material Master for this component. May differ from bomUnitOfMeasure when ordering in alternate units for example ordered in packs, stocked in each.
+  deliveryGroup:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Delivery Group
+    description: SAP kitting group ID, LIPOS, that groups BOM components for simultaneous picking and staging to the work site. Components in the same delivery group are dispatched together.
+  inheritedNodeNumber:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Inherited Node Number
+    description: Node number inherited from the Material BOM that links this Equipment or Functional Location BOM item back to the design-level Material BOM item. Enables cross-BOM traceability.
+  purchasingGroup:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Purchasing Group
+    description: SAP purchasing group, EKGRP, responsible for procuring this component when it requires external processing. Used for workload routing and spend analysis.
+  storageLocation:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Storage Location
+    description: Direct relation to the FunctionalAsset node representing the storage location where this component is staged or available within the plant.
+  validFromDate:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Valid From Date
+    description: Item-level validity start date. The component is only valid within this BOM from this date onwards. Enables time-dependent BOM structures.
+  validToDate:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Valid To Date
+    description: Item-level validity end date. The component is no longer valid in this BOM after this date. Used for phase-in and phase-out component management.
+indexes:
+  billOfMaterialsHeader:
+    indexType: btree
+    properties:
+    - billOfMaterialsHeader
+    cursorable: false
+  bomComponentMaterial:
+    indexType: btree
+    properties:
+    - bomComponentMaterial
+    cursorable: false
+  bomUnitOfMeasure:
+    indexType: btree
+    properties:
+    - bomUnitOfMeasure
+    cursorable: false
+  bomItemNumber:
+    indexType: btree
+    properties:
+    - bomItemNumber
+    cursorable: true
+  bomItemNodeNumber:
+    indexType: btree
+    properties:
+    - bomItemNodeNumber
+    cursorable: true
+  bomComponentMaterialId:
+    indexType: btree
+    properties:
+    - bomComponentMaterialId
+    cursorable: true
+  bomItemCategory:
+    indexType: btree
+    properties:
+    - bomItemCategory
+    cursorable: true
+  inheritedNodeNumber:
+    indexType: btree
+    properties:
+    - inheritedNodeNumber
+    cursorable: true
+  storageLocation:
+    indexType: btree
+    properties:
+    - storageLocation
+    cursorable: false
+usedFor: node

@@ -1,0 +1,2 @@
+space: {{ isc_IsaSchemaSpace }}
+name: ISC ISA Manufacturing Schema Space

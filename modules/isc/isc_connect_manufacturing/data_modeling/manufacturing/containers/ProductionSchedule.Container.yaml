@@ -1,0 +1,425 @@
+space: {{ isc_IsaSchemaSpace }}
+externalId: ProductionSchedule
+name: ProductionSchedule
+description: Detailed production schedule and execution instruction ISA-95 Level 3.
+usedFor: node
+constraints:
+  requiresCogniteActivity:
+    constraintType: requires
+    require:
+      space: cdf_cdm
+      externalId: CogniteActivity
+      type: container
+  requiresCogniteSchedulable:
+    constraintType: requires
+    require:
+      space: cdf_cdm
+      externalId: CogniteSchedulable
+      type: container
+properties:
+  sourceUpdatedUser:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceUpdatedUser
+    description: User that last updated this node in the source system.
+  sourceCreatedUser:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceCreatedUser
+    description: User that created this node in the source system.
+  sourceUpdatedTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceUpdatedTime
+    description: Timestamp when the node was last updated in the source system.
+  sourceCreatedTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceCreatedTime
+    description: Timestamp when the node was created in the source system.
+  sourceContext:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceContext
+    description: Source system or context for this node.
+  sourceId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: sourceId
+    description: Identifier from the upstream source system.
+  description:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: description
+    description: Human-readable description for this node.
+  name:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: name
+    description: Human-readable name for this node.
+  workType:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Work Type
+  workStatus:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Work Status
+  assignedPersonnel:
+    type:
+      list: true
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Assigned Personnel
+  equipment:
+    type:
+      list: true
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: equipment
+  plannedStartTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Planned Start Time
+  plannedEndTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Planned End Time
+  actualStartTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Actual Start Time
+  actualEndTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Actual End Time
+  plannedQuantity:
+    type:
+      list: false
+      type: float64
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Planned Quantity
+    description: Total quantity of the finished material to be produced as specified in the order header.
+  actualPackagedQuantity:
+    type:
+      list: false
+      type: float64
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Actual Packaged Quantity
+    description: Actual quantity of finished goods goods-receipted and confirmed against this production order.
+  actualConsumptionQuantity:
+    type:
+      list: false
+      type: float64
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Actual Consumption Quantity
+    description: Actual quantity of input material consumed during production, goods issued against the order.
+  scheduledReleaseDate:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Scheduled Release Date
+    description: Date on which the production order is planned to be released to the shop floor for execution.
+  scheduledStartDate:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Scheduled Start Date
+    description: Planned start date and time for order execution. Used for capacity planning and scheduling.
+  scheduledFinishDate:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Scheduled Finish Date
+    description: Planned finish date and time for order execution. Used for on-time delivery and schedule adherence tracking.
+  actualStartDate:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Actual Start Date
+    description: Date and time when production execution actually began. Compared against scheduledStartDate for delay analysis.
+  actualFinishDate:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Actual Finish Date
+    description: Date and time when production execution was actually completed. Used for lead time and MTTR calculations.
+  confirmedOrderFinishDate:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Confirmed Order Finish Date
+    description: Confirmed completion date acknowledged during the final confirmation step.
+  orderCategory:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Order Category
+    description: order category code classifying the order type - 10 for Production Order, PP, 40 for Process Order, PP-PI.
+  refMaterial:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Material
+    description: Direct relation to the MaterialMaster node for the finished or semi-finished product being manufactured.
+  reportingPlant:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Reporting Plant
+    description: Direct relation to the FunctionalAsset node for the plant where this production order is executed and goods receipted.
+  reportingSite:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Reporting Site
+    description: Direct relation to the FunctionalAsset node representing the site or area grouping above the plant level.
+  plannedQuantityUnit:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Planned Quantity Unit
+    description: Direct relation to the CogniteUnit node for the base unit of measure of the planned production quantity.
+  billOfMaterials:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Bill of Materials
+    description: Direct relation to the BillOfMaterialsHeader node used by this production order.
+  productionOrderNumber:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: true
+    nullable: true
+    autoIncrement: false
+    name: Production Order Number
+    description: Unique production or process order number. Primary identifier for this manufacturing execution record - not nullable.
+  orderStatus:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Order Status
+    description: System status of the production order.
+  workCenter:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Work Center
+    description: Primary work centre responsible for executing the main production operations on this order. Used for capacity planning.
+  productionVersion:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Production Version
+    description: production version code identifying the specific BOM and routing or recipe combination selected for this order.
+  plannedCost:
+    type:
+      list: false
+      type: float64
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Planned Cost
+    description: Planned total cost for this production order based on standard cost rates for components and operations.
+  actualCost:
+    type:
+      list: false
+      type: float64
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Actual Cost
+    description: Actual total cost incurred for this production order including material consumption and operation confirmations.
+  customerOrderRef:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Customer Order Reference
+    description: Customer order number to which this production order is pegged in make-to-order production.
+  plant:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: plant
+    description: Direct relation to the FunctionalAsset node for the planning and execution plant responsible for this work order.
+  refCostCenter:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Ref Cost Center
+    description: Direct relation to the BusinessUnits node for the cost center associated with this work order.
+indexes:
+  productionOrderNumber:
+    properties:
+    - productionOrderNumber
+    cursorable: true
+    indexType: btree
+  orderStatus:
+    properties:
+    - orderStatus
+    cursorable: true
+    indexType: btree
+  scheduledStartDate:
+    properties:
+    - scheduledStartDate
+    cursorable: true
+    indexType: btree
+  scheduledFinishDate:
+    properties:
+    - scheduledFinishDate
+    cursorable: true
+    indexType: btree
+  refMaterial:
+    properties:
+    - refMaterial
+    cursorable: false
+    indexType: btree
+  reportingPlant:
+    properties:
+    - reportingPlant
+    cursorable: false
+    indexType: btree
+  billOfMaterials:
+    properties:
+    - billOfMaterials
+    cursorable: false
+    indexType: btree
+  customerOrderRef:
+    properties:
+    - customerOrderRef
+    cursorable: false
+    indexType: btree

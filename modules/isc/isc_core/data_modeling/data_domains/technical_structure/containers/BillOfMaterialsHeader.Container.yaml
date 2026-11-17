@@ -1,0 +1,296 @@
+space: {{ isc_TechnicalStructureSchemaSpace }}
+externalId: BillOfMaterialsHeader
+name: BillOfMaterialsHeader
+description: BOM header-level properties describing the assembly structure identity, parent resource, validity, and lifecycle. Shared across all item nodes belonging to the same BOM.
+properties:
+  name:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Name
+    description: Human-readable name for this node.
+  description:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Description
+    description: Human-readable description for this node.
+  sourceId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source ID
+    description: Identifier from the upstream source system.
+  sourceContext:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Context
+    description: Source system or context for this node.
+  sourceCreatedTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Created Time
+    description: Timestamp when the node was created in the source system.
+  sourceUpdatedTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Updated Time
+    description: Timestamp when the node was last updated in the source system.
+  sourceCreatedUser:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Created User
+    description: User that created this node in the source system.
+  sourceUpdatedUser:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Updated User
+    description: User that last updated this node in the source system.
+  bomNumber:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: false
+    autoIncrement: false
+    name: BOM Number
+    description: The unique internal Bill of Material Number that acts as the primary key for the assembly structure.
+  bomCategoryNumber:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: false
+    autoIncrement: false
+    name: BOM Category Number
+    description: The unique ID of the object that owns the BOM for example Material ID, Equipment ID, or Functional Location ID.
+  bomCategory:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Category
+    description: BOM category. Classifies the type of Bill of Material for example material BOM, equipment BOM.
+  bomAsset:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Asset
+    description: Direct relation to the equipment or asset this BOM is defined for for example pump, compressor, transformer.
+  bomFunctionalLocation:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Functional Location
+    description: Direct relation to the functional location, process area or physical slot, this BOM is associated with.
+  bomPlant:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Plant
+    description: Direct relation to the plant or site where this BOM configuration is active and valid.
+  bomUsage:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Usage
+    description: Defines the application area for example Usage 4 for Plant Maintenance or 1 for Production.
+  bomStatus:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Status
+    description: The current state of the BOM for example 01 for Active, 03 for Blocked and Inactive.
+  bomValidFromDate:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Valid From Date
+    description: The date when this specific parts configuration became effective for the parent resource.
+  bomValidToDate:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Valid To Date
+    description: The date when this specific parts configuration is set to expire or was superseded.
+  refAlternativeBOM:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Alternative BOM
+    description: Direct relation to the alternative BOM.
+  bomAlternativeNumber:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Alternative BOM
+    description: Alternative BOM number. Represents different versions of a BOM for the same material.
+  bomCreatedOn:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: BOM Created On
+    description: Date on which the BOM header was created in the source ERP system.
+  bomOrderLevel:
+    type:
+      list: false
+      type: int32
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Order Level
+    description: BOM order level indicating the numeric hierarchy depth in a multi-level BOM, 0 for top level, 1 for first level component, etc.
+  bomInternalCounter:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Internal Counter
+    description: Internal counter used for versioning BOM records.
+  dateOfLastChange:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Date of Last Change
+    description: Date when the BOM header was last changed in the source ERP system. Used to identify recently modified BOMs and trigger re-explode workflows.
+  materialNumber:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Material Number
+    description: Material number linking Equipment or Functional Location BOMs back to the design-level Material BOM. Enables cross-reference queries between asset and material BOM structures.
+indexes:
+  bomAsset:
+    indexType: btree
+    properties:
+    - bomAsset
+    cursorable: false
+  bomFunctionalLocation:
+    indexType: btree
+    properties:
+    - bomFunctionalLocation
+    cursorable: false
+  bomPlant:
+    indexType: btree
+    properties:
+    - bomPlant
+    cursorable: false
+  refAlternativeBOM:
+    indexType: btree
+    properties:
+    - refAlternativeBOM
+    cursorable: false
+  bomNumber:
+    indexType: btree
+    properties:
+    - bomNumber
+    cursorable: true
+  bomCategoryNumber:
+    indexType: btree
+    properties:
+    - bomCategoryNumber
+    cursorable: true
+  bomUsage:
+    indexType: btree
+    properties:
+    - bomUsage
+    cursorable: true
+  bomStatus:
+    indexType: btree
+    properties:
+    - bomStatus
+    cursorable: true
+  bomValidFromDate:
+    indexType: btree
+    properties:
+    - bomValidFromDate
+    cursorable: true
+  materialNumber:
+    indexType: btree
+    properties:
+    - materialNumber
+    cursorable: true
+usedFor: node

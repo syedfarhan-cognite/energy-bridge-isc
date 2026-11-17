@@ -1,0 +1,38 @@
+space: {{ isc_MaterialManagementSchemaSpace }}
+externalId: MaterialManagement
+name: MaterialManagement
+description: Material management domain — masters, inventory, lots, reservations.
+version: '{{dmVersion}}'
+views:
+- space: {{ isc_MaterialManagementSchemaSpace }}
+  externalId: MaterialMaster
+  version: '{{dmVersion}}'
+  type: view
+- space: {{ isc_MaterialManagementSchemaSpace }}
+  externalId: MaterialInventory
+  version: '{{dmVersion}}'
+  type: view
+- space: {{ isc_MaterialManagementSchemaSpace }}
+  externalId: MaterialLot
+  version: '{{dmVersion}}'
+  type: view
+- space: {{ isc_MaterialManagementSchemaSpace }}
+  externalId: MaterialAlternative
+  version: '{{dmVersion}}'
+  type: view
+- space: {{ isc_MaterialManagementSchemaSpace }}
+  externalId: InventoryQualityResult
+  version: '{{dmVersion}}'
+  type: view
+- space: {{ isc_MaterialManagementSchemaSpace }}
+  externalId: StorageLocations
+  version: '{{dmVersion}}'
+  type: view
+- space: {{ isc_MaterialManagementSchemaSpace }}
+  externalId: LotStoredInBin
+  version: '{{dmVersion}}'
+  type: view
+- space: {{ isc_MaterialManagementSchemaSpace }}
+  externalId: MaterialReservation
+  version: '{{dmVersion}}'
+  type: view

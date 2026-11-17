@@ -1,0 +1,340 @@
+space: {{ isc_CustomerDemandFulfilmentSchemaSpace }}
+externalId: Customer
+name: Customer
+description: Central customer master record representing the sold-to commercial entity for downstream demand fulfilment. Site-level delivery locations are modelled separately in CustomerLocation.
+properties:
+  name:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Name
+    description: Human-readable name for this node.
+  description:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Description
+    description: Human-readable description for this node.
+  sourceId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source ID
+    description: Identifier from the upstream source system.
+  sourceContext:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Context
+    description: Source system or context for this node.
+  sourceCreatedTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Created Time
+    description: Timestamp when the node was created in the source system.
+  sourceUpdatedTime:
+    type:
+      list: false
+      type: timestamp
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Updated Time
+    description: Timestamp when the node was last updated in the source system.
+  sourceCreatedUser:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Created User
+    description: User that created this node in the source system.
+  sourceUpdatedUser:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Source Updated User
+    description: User that last updated this node in the source system.
+  customerId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: false
+    autoIncrement: false
+    name: Customer ID
+    description: Unique identifier for the customer in the source system. Primary key and stable business identifier.
+  customerGroup:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Customer Group
+    description: Commercial segmentation category driving allocation priority and pricing rules.
+  customerCountry:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Customer Country
+    description: Country of the customers registered headquarters using an ISO 3166-1 Alpha-2 code where available.
+  deliveryPriority:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Delivery Priority
+    description: Default fulfilment priority tier assigned to this customer and inherited by orders unless overridden.
+  creditLimit:
+    type:
+      list: false
+      type: float64
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Credit Limit
+    description: Maximum open credit exposure allowed for this customer in the default transaction currency.
+  creditStatus:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Credit Status
+    description: Current credit block state for the customer, for example Clear or CreditHold.
+  riskRating:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Risk Rating
+    description: Customer risk classification based on payment behaviour and financial assessment.
+  businessValueTier:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Business Value Tier
+    description: Strategic importance tier used for allocation and service-level differentiation.
+  paymentTerms:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Payment Terms
+    description: Default payment terms for this customer, for example NET30 or COD.
+  currency:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Currency
+    description: Default transaction currency for this customer using an ISO 4217 code where available.
+  incoterms:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Incoterms
+    description: Default delivery terms for this customer, for example EXW, FOB, CIF, or DAP.
+  salesOrganization:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Sales Organization
+    description: Primary sales organisation responsible for the customer relationship.
+  contactName:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Contact Name
+    description: Primary commercial contact name for order-related communications.
+  contactEmail:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Contact Email
+    description: Primary commercial contact email used for order confirmation and allocation notifications.
+  contactPhone:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Contact Phone
+    description: Primary commercial contact phone number.
+  parentCustomerId:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Parent Customer ID
+    description: Text identifier of the parent customer or corporate group entity for group-level reporting.
+  parentCustomerDescription:
+    type:
+      list: false
+      collation: ucs_basic
+      type: text
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Parent Customer Description
+    description: Human-readable name of the parent customer organisation.
+  onTimeDeliveryRate:
+    type:
+      list: false
+      type: float64
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: On-Time Delivery Rate
+    description: Percentage of deliveries to this customer arriving on time.
+  orderFillRate:
+    type:
+      list: false
+      type: float64
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Order Fill Rate
+    description: Percentage of ordered quantity successfully fulfilled for this customer.
+  isActive:
+    type:
+      list: false
+      type: boolean
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Is Active
+    description: Whether this customer is currently active for order processing.
+  geoLocation:
+    type:
+      list: false
+      type: direct
+    immutable: false
+    nullable: true
+    autoIncrement: false
+    name: Geo Location
+    description: Direct relation to the GeoLocations node representing the customers primary geographic location.
+indexes:
+  customerId:
+    properties:
+    - customerId
+    cursorable: true
+    indexType: btree
+  customerGroup:
+    properties:
+    - customerGroup
+    cursorable: true
+    indexType: btree
+  customerCountry:
+    properties:
+    - customerCountry
+    cursorable: true
+    indexType: btree
+  riskRating:
+    properties:
+    - riskRating
+    cursorable: true
+    indexType: btree
+  deliveryPriority:
+    properties:
+    - deliveryPriority
+    cursorable: true
+    indexType: btree
+  creditStatus:
+    properties:
+    - creditStatus
+    cursorable: true
+    indexType: btree
+  isActive:
+    properties:
+    - isActive
+    cursorable: true
+    indexType: btree
+  geoLocation:
+    properties:
+    - geoLocation
+    cursorable: false
+    indexType: btree
+  parentCustomerId:
+    properties:
+    - parentCustomerId
+    cursorable: true
+    indexType: btree
+  businessValueTier:
+    properties:
+    - businessValueTier
+    cursorable: true
+    indexType: btree
+usedFor: node

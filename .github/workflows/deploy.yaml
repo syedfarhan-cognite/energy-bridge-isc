@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - modules/**
+      - energy-bridge-isc/**
   workflow_dispatch:
     inputs:
       environment:

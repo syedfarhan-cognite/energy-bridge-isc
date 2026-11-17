@@ -49,6 +49,6 @@ jobs:
       - name: Verify and Update Toolkit Authorization
         run: yes | cdf auth verify
       - name: Build Toolkit Configurations
-        run: cdf build --env=${{ matrix.environment }}
+        run: cdf build --env=${{ matrix.environment }} -o energy-bridge-isc
       - name: Deploy Toolkit Configurations
-        run: cdf deploy --env=${{ matrix.environment }}
+        run: cdf deploy --env=${{ matrix.environment }} -o energy-bridge-isc

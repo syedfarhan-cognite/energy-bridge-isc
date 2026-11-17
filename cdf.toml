@@ -1,5 +1,5 @@
 [cdf]
-default_organization_dir = "."
+default_organization_dir = "energy-bridge-isc"
 default_env = "dev"
 
 [modules]

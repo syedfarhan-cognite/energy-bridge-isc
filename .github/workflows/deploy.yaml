@@ -51,4 +51,4 @@ jobs:
       - name: Build Toolkit Configurations
         run: cdf build --env=${{ matrix.environment }} -o energy-bridge-isc
       - name: Deploy Toolkit Configurations
-        run: cdf deploy --env=${{ matrix.environment }} -o energy-bridge-isc
+        run: cdf deploy

@@ -1,0 +1,54 @@
+name: Deploy Toolkit
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - energy-bridge-isc/**
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Pick one
+        required: false
+        type: choice
+        options:
+          - test
+          - prod
+
+jobs:
+  build-modules:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    container:
+      image: cognite/toolkit:0.8.191  # Make sure the toolkit version matches the version in cdf.toml
+    strategy:
+      matrix:
+        include:
+          # Deploy to 'test' environment automatically, only on push to main branch
+          - environment: ${{ inputs.environment != '' && inputs.environment || 'test' }}
+
+    environment: ${{ matrix.environment }}
+    env:
+      # TODO: add your environment variables here (CDF_PROJECT, CDF_CLUSTER,
+      # IDP_TENANT_ID, IDP_TOKEN_URL, LOGIN_FLOW, IDP_CLIENT_ID,
+      # IDP_CLIENT_SECRET, and any project-specific variables referenced in
+      # config.test.yaml / config.prod.yaml, e.g. HIERARCHY_PATH_TRIGGER_CLIENT_ID)
+      CDF_PROJECT: cdf-bootcamp-75-${{ matrix.environment }}
+      CDF_CLUSTER: westeurope-1
+      IDP_TENANT_ID: 16e3985b-ebe8-4e24-9da4-933e21a9fc81
+      IDP_TOKEN_URL: https://login.microsoftonline.com/16e3985b-ebe8-4e24-9da4-933e21a9fc81/oauth2/v2.0/token
+      LOGIN_FLOW: client_credentials
+
+      IDP_CLIENT_ID: ${{ vars.IDP_CLIENT_ID }}
+      IDP_CLIENT_SECRET: ${{ secrets.IDP_CLIENT_SECRET }}
+
+      DATA_DEVELOPER_SOURCE_ID: ${{ vars.DATA_DEVELOPER_SOURCE_ID }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify and Update Toolkit Authorization
+        run: yes | cdf auth verify
+      - name: Build Toolkit Configurations
+        run: cdf build --env=${{ matrix.environment }}
+      - name: Deploy Toolkit Configurations
+        run: cdf deploy --env=${{ matrix.environment }}

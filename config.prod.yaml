@@ -1,7 +1,7 @@
 environment:
-  name: dev
+  name: prod
   project: ${CDF_PROJECT}
-  validation-type: dev
+  validation-type: prod
   selected:
     - modules/isc/isc_core
     - modules/isc/isc_edges

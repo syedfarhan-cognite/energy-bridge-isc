@@ -22,5 +22,10 @@ FROM VALUES
     ('CostCenter', 'CostCenter', 'Cost center accountable for assets and spend.', 'BusinessUnits'),
     ('Warehouse', 'Warehouse', 'Warehouse or storage site.', 'StorageLocations'),
     ('Zone', 'Zone', 'Zone within a warehouse.', 'StorageLocations'),
-    ('StorageBin', 'StorageBin', 'Storage bin within a zone.', 'StorageLocations')
+    ('StorageBin', 'StorageBin', 'Storage bin within a zone.', 'StorageLocations'),
+    ('StorageBin', 'StorageBin', 'Storage bin within a zone.', 'StorageLocations'),
+    ('ProductSector', 'ProductSector', 'Product sector in the product classification hierarchy.', 'Products'),
+    ('ProductFamily', 'ProductFamily', 'Product family in the product classification hierarchy.', 'Products'),
+    ('ProductGroup', 'ProductGroup', 'Product group in the product classification hierarchy.', 'Products'),
+    ('ProductSubgroup', 'ProductSubgroup', 'Product subgroup in the product classification hierarchy.', 'Products')
     AS t(externalId, name, description, used_by_container)

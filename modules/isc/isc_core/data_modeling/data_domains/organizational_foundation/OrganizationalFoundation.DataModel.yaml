@@ -24,3 +24,7 @@ views:
   externalId: NotificationLinksEntity
   version: '{{dmVersion}}'
   type: view
+- space: {{isc_OrganizationalFoundationSchemaSpace}}
+  externalId: Products
+  version: '{{dmVersion}}'
+  type: view

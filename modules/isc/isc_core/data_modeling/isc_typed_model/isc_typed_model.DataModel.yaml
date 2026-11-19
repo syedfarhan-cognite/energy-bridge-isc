@@ -40,3 +40,19 @@ views:
   externalId: StorageBin
   version: '{{dmVersion}}'
   type: view
+- space: {{isc_TypedModelSchemaSpace}}
+  externalId: ProductFamily
+  version: '{{dmVersion}}'
+  type: view
+- space: {{isc_TypedModelSchemaSpace}}
+  externalId: ProductSubgroup
+  version: '{{dmVersion}}'
+  type: view
+- space: {{isc_TypedModelSchemaSpace}}
+  externalId: ProductSector
+  version: '{{dmVersion}}'
+  type: view
+- space: {{isc_TypedModelSchemaSpace}}
+  externalId: ProductGroup
+  version: '{{dmVersion}}'
+  type: view

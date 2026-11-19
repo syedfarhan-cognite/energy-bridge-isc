@@ -1,0 +1,244 @@
+space: {{ isc_OrganizationalFoundationSchemaSpace }}
+externalId: Products
+name: Products
+description: Product classification hierarchy interface for grouping materials and finished goods. Platform functions use this view; agents should use concrete types such as ProductFamily or ProductGroup.
+version: '{{viewVersion}}'
+properties:
+  sourceCreatedUser:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: sourceCreatedUser
+    name: Source Created User
+    description: User that created this node in the source system.
+  sourceUpdatedUser:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: sourceUpdatedUser
+    name: Source Updated User
+    description: User that last updated this node in the source system.
+  name:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: name
+    name: Name
+    description: Human-readable name for this product hierarchy node.
+  description:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: description
+    name: Description
+    description: Description of this product hierarchy node.
+  tags:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: tags
+    name: Tags
+    description: Text-based labels for generic use, limited to 1000.
+  aliases:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: aliases
+    name: Aliases
+    description: Alternative names for this product hierarchy node.
+  sourceId:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: sourceId
+    name: Source ID
+    description: Identifier from the upstream source system.
+  sourceContext:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: sourceContext
+    name: Source context
+    description: Source system or context for this node.
+  sourceCreatedTime:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: sourceCreatedTime
+    name: Source created time
+    description: Timestamp when the node was created in the source system.
+  sourceUpdatedTime:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: sourceUpdatedTime
+    name: Source updated time
+    description: Timestamp when the node was last updated in the source system.
+  parent:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: parent
+    source:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      version: '{{viewVersion}}'
+      type: view
+    name: Parent
+    description: The parent of this product hierarchy node in the classification tree.
+  root:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: root
+    source:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      version: '{{viewVersion}}'
+      type: view
+    name: Root
+    description: An automatically updated reference to the top-level node of the product hierarchy.
+  path:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: path
+    source:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      version: '{{viewVersion}}'
+      type: view
+    name: Path
+    description: An automatically updated ordered list of this nodes ancestors, starting with the root node. Enables subtree filtering.
+  pathLastUpdatedTime:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: pathLastUpdatedTime
+    name: Path last updated time
+    description: The last time the hierarchy path was updated for this product hierarchy node.
+  declaredType:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: declaredType
+    source:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: DeclaredTypes
+      version: '{{viewVersion}}'
+      type: view
+    name: Declared Type
+    description: Concrete view external id for this instance, for example ProductFamily or ProductGroup.
+  hierarchyCode:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: hierarchyCode
+    name: Hierarchy Code
+    description: Short unique code identifying this node in the source ERP or classification system.
+  hierarchyDepth:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: hierarchyDepth
+    name: Hierarchy Depth
+    description: Zero-based numeric depth in the tree, 0 for root, 1, 2.
+  productHierarchyCode:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: productHierarchyCode
+    name: Product Hierarchy Code
+    description: Full concatenated hierarchy code string for this node, all ancestor codes joined.
+  productFamilyCode:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: productFamilyCode
+    name: Product Family Code
+    description: Denormalised product family code inherited from the ancestor node at the ProductFamily level.
+  productGroupCode:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: productGroupCode
+    name: Product Group Code
+    description: Denormalised product group code inherited from the ancestor node at the ProductGroup level.
+  productSubGroupCode:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: productSubGroupCode
+    name: Product Sub-Group Code
+    description: Denormalised product sub-group code inherited from the ancestor node at the ProductSubGroup level.
+  businessHierarchy:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: businessHierarchy
+    source:
+      space: {{ isc_TypedModelSchemaSpace }}
+      externalId: CostCenter
+      version: '{{viewVersion}}'
+      type: view
+    name: Business Hierarchy
+    description: Direct relation to the CostCenter node representing the organisational unit accountable for this product classification.
+  materials:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: materials
+    source:
+      space: {{ isc_MaterialManagementSchemaSpace }}
+      externalId: MaterialMaster
+      version: '{{viewVersion}}'
+      type: view
+    name: Materials
+    description: Direct relations to the MaterialMaster nodes classified under this product hierarchy node.
+  isActive:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: isActive
+    name: Is Active
+    description: Whether this hierarchy node is currently active.
+  children:
+    source:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      version: '{{viewVersion}}'
+      type: view
+    through:
+      source:
+        space: {{ isc_OrganizationalFoundationSchemaSpace }}
+        externalId: Products
+        version: '{{viewVersion}}'
+        type: view
+      identifier: parent
+    name: Children
+    description: Product hierarchy nodes with this node as their parent.
+    connectionType: multi_reverse_direct_relation

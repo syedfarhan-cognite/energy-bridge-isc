@@ -1,0 +1,62 @@
+space: {{ isc_TypedModelSchemaSpace }}
+externalId: ProductSubgroup
+name: Product subgroup
+description: Product subgroup in the product classification hierarchy.
+version: '{{viewVersion}}'
+filter:
+  and:
+  - hasData:
+    - type: container
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+  - equals:
+      property:
+      - {{ isc_OrganizationalFoundationSchemaSpace }}
+      - Products
+      - declaredType
+      value:
+        space: {{ isc_OrganizationalFoundationSchemaSpace }}
+        externalId: ProductSubgroup
+properties:
+  declaredType:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: declaredType
+    source:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: DeclaredTypes
+      version: '{{viewVersion}}'
+      type: view
+    name: Declared Type
+    description: Concrete view type for this instance.
+  product_group:
+    container:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      type: container
+    containerPropertyIdentifier: parent
+    source:
+      space: {{ isc_TypedModelSchemaSpace }}
+      externalId: ProductGroup
+      version: '{{viewVersion}}'
+      type: view
+    name: ProductGroup
+    description: Parent ProductGroup in the product hierarchy.
+  children:
+    source:
+      space: {{ isc_OrganizationalFoundationSchemaSpace }}
+      externalId: Products
+      version: '{{viewVersion}}'
+      type: view
+    through:
+      source:
+        space: {{ isc_OrganizationalFoundationSchemaSpace }}
+        externalId: Products
+        version: '{{viewVersion}}'
+        type: view
+      identifier: parent
+    name: Children
+    description: Product hierarchy nodes with this node as their parent.
+    connectionType: multi_reverse_direct_relation

@@ -1,0 +1,72 @@
+name: Diagnose production authorization (read only)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    environment: prod
+    env:
+      CDF_PROJECT: cdf-bootcamp-51-prod
+      IDP_TENANT_ID: 16e3985b-ebe8-4e24-9da4-933e21a9fc81
+      IDP_CLIENT_ID: ${{ vars.IDP_CLIENT_ID }}
+      IDP_CLIENT_SECRET: ${{ secrets.IDP_CLIENT_SECRET }}
+    steps:
+      - name: Inspect identity and effective CDF access without modifying resources
+        shell: python
+        run: |
+          import base64
+          import json
+          import os
+          import urllib.error
+          import urllib.parse
+          import urllib.request
+          
+          tenant = os.environ['IDP_TENANT_ID']
+          client_id = os.environ['IDP_CLIENT_ID']
+          project = os.environ['CDF_PROJECT']
+          base = 'https://westeurope-1.cognitedata.com'
+          
+          def request_json(url, data=None, token=None):
+              headers = {'Accept': 'application/json', 'cdf-version': '20230101'}
+              if token:
+                  headers['Authorization'] = 'Bearer ' + token
+              if data is not None:
+                  headers['Content-Type'] = 'application/x-www-form-urlencoded'
+                  data = urllib.parse.urlencode(data).encode()
+              try:
+                  with urllib.request.urlopen(urllib.request.Request(url, data=data, headers=headers), timeout=40) as response:
+                      return response.status, json.load(response)
+              except urllib.error.HTTPError as exc:
+                  # Deliberately do not print response bodies or request headers.
+                  return exc.code, {}
+          
+          status, response = request_json('https://login.microsoftonline.com/' + tenant + '/oauth2/v2.0/token', {
+              'grant_type': 'client_credentials', 'client_id': client_id,
+              'client_secret': os.environ['IDP_CLIENT_SECRET'], 'scope': base + '/.default',
+          })
+          print('Entra token request HTTP status:', status)
+          if status != 200:
+              raise SystemExit(1)
+          token = response['access_token']
+          payload = token.split('.')[1]
+          claims = json.loads(base64.urlsafe_b64decode(payload + '=' * (-len(payload) % 4)))
+          allowed = ['aud', 'iss', 'tid', 'appid', 'azp', 'oid', 'ver', 'idtyp', 'groups', 'roles', 'scp', '_claim_names']
+          print('Selected identity claims (no token):', json.dumps({key: claims[key] for key in allowed if key in claims}, sort_keys=True))
+          status, inspection = request_json(base + '/api/v1/token/inspect', token=token)
+          print('CDF token inspection HTTP status:', status)
+          if status == 200:
+              print('CDF recognized subject:', inspection.get('subject'))
+              print('CDF recognized projects:', json.dumps(inspection.get('projects', []), sort_keys=True))
+              caps = inspection.get('capabilities', [])
+              print('CDF capability count:', len(caps))
+              print('CDF capability types:', json.dumps(sorted({key for cap in caps for key in cap if key.endswith('Acl')})))
+          status, groups = request_json(base + '/api/v1/projects/' + project + '/groups', token=token)
+          print('CDF own groups HTTP status:', status)
+          if status == 200:
+              print('CDF resolved groups:', json.dumps([
+                  {'name': group.get('name'), 'id': group.get('id'), 'sourceId': group.get('sourceId'),
+                   'capabilityTypes': sorted({key for cap in group.get('capabilities', []) for key in cap if key.endswith('Acl')})}
+                  for group in groups.get('items', [])
+              ], sort_keys=True))
